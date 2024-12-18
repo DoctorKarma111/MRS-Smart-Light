@@ -8,9 +8,16 @@ function getToken(filePath: string): string {
         const tokenMatch = content.match(/token=(.*)/);
         
         if (tokenMatch) {
-            return tokenMatch[1].trim();
+            const token = tokenMatch[1].trim();
+            
+            if (token === 'ENTER_TOKEN_HERE') {
+                throw new Error('Please enter a Medrunner API token in the token text file')
+            }
+
+            return token
+
         } else {
-            throw new Error('Please enter a token in the "token" text file');
+            throw new Error('Token not found in token file');
         }
     } catch (error) {
         console.error(`Error reading token from file: ${error.message}`);
@@ -18,31 +25,35 @@ function getToken(filePath: string): string {
     }
 }
 
+// define token filepath and call function to read token
 const filePath = './token.txt';
 const apiToken = getToken(filePath)
 
-
 // authenticate with API
-const apiConfig = {
-    refreshToken: apiToken
-};
+let ws;
+try {
+    const apiConfig = {
+        refreshToken: apiToken
+    };
 
-const api = MedrunnerApiClient.buildClient(apiConfig);
+    const api = MedrunnerApiClient.buildClient(apiConfig);
 
-// Connect
-const ws = await api.websocket.initialize();
-await ws.start();
+    ws = await api.websocket.initialize();
+    await ws.start();
+} catch (error) {
+    console.error('Invalid Medrunner API token. Has yours expired?');
+    process.exit(1);
+}
 
 // confirm connection
 console.log(ws.state);
 
-// event listeners
-
+// medrunner update listener, for if we want to have any response to joining & leaving and/or selecting a class
 ws.on("PersonUpdate", (runner: Person) => {
     switch (runner.activeClass) {
-        case 0: // No class. As far as I know, cannot be achieved after selecting a class.
-            console.log(`${runner.rsiHandle} has joined a team or left a role`);
-            break;
+//        case 0: // No class. As far as I know, cannot be achieved after selecting a class.
+//            console.log(`${runner.rsiHandle} has joined a team or left a role`);
+//            break;
         case 1: // Medic
             console.log(`${runner.rsiHandle} has selected MED`);
             break;
@@ -76,6 +87,7 @@ ws.on("PersonUpdate", (runner: Person) => {
     }
 });
 
+// new alert listener, operates independently of whether or not medrunner is currently in a team
 ws.on("EmergencyCreate", (emergency: Emergency) => {
-    console.log(`Emergency "${emergency.id}" alert has been created, submitted by ${emergency.clientRsiHandle}`)
+    console.log(`Emergency "${emergency.missionName}" alert has been created, submitted by ${emergency.clientRsiHandle}`)
 });
