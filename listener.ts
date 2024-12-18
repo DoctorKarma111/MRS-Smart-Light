@@ -1,33 +1,9 @@
 import { MedrunnerApiClient } from "@medrunner/api-client";
-import * as fs from 'fs';
+import * as dotenv from 'dotenv'
 
-// function to read token from file
-function getToken(filePath: string): string {
-    try {
-        const content = fs.readFileSync(filePath, 'utf-8');
-        const tokenMatch = content.match(/token=(.*)/);
-        
-        if (tokenMatch) {
-            const token = tokenMatch[1].trim();
-            
-            if (token === 'ENTER_TOKEN_HERE') {
-                throw new Error('Please enter a Medrunner API token in the token text file')
-            }
-
-            return token
-
-        } else {
-            throw new Error('Token not found in token file');
-        }
-    } catch (error) {
-        console.error(`Error reading token from file: ${error.message}`);
-        process.exit(1);
-    }
-}
-
-// define token filepath and call function to read token
-const filePath = './token.txt';
-const apiToken = getToken(filePath)
+// get token from .env and call function to read token
+dotenv.config();
+const apiToken = process.env.API_TOKEN;
 
 // authenticate with API
 let ws;
@@ -35,7 +11,6 @@ try {
     const apiConfig = {
         refreshToken: apiToken
     };
-
     const api = MedrunnerApiClient.buildClient(apiConfig);
 
     ws = await api.websocket.initialize();
