@@ -1,0 +1,17 @@
+{
+  "name": "medrunnerlistener",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@medrunner/api-client": "^0.2.1",
+    "@types/node": "^22.10.2",
+    "esrun": "^3.2.26"
+  }
+}
