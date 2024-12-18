@@ -5,6 +5,12 @@ import * as dotenv from 'dotenv'
 dotenv.config();
 const apiToken = process.env.API_TOKEN;
 
+// make sure they actually put something in for the token
+if (apiToken === "YOUR_TOKEN_HERE") {
+    console.error('Please edit the .env file and enter your Medrunner API token.');
+    process.exit(1);
+}
+
 // authenticate with API
 let ws;
 try {
