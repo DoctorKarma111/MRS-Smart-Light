@@ -1,4 +1,4 @@
-import { MedrunnerApiClient } from "@medrunner/api-client";
+import { Emergency, MedrunnerApiClient, Person } from "@medrunner/api-client";
 import * as dotenv from 'dotenv'
 
 // get token from .env and call function to read token
@@ -31,6 +31,7 @@ console.log(ws.state);
 
 // medrunner update listener, for if we want to have any response to joining & leaving and/or selecting a class
 ws.on("PersonUpdate", (runner: Person) => {
+    // @ts-ignore potentially the most scuffed solution i've ever seen
     switch (runner.activeClass) {
 //        case 0: // No class. As far as I know, cannot be achieved after selecting a class.
 //            console.log(`${runner.rsiHandle} has joined a team or left a role`);
