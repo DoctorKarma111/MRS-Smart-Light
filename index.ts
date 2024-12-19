@@ -1,5 +1,15 @@
-import { Emergency, MedrunnerApiClient, Person } from "@medrunner/api-client";
-import * as dotenv from 'dotenv'
+import { Emergency, MedrunnerApiClient, Person } from '@medrunner/api-client';
+import * as fs from 'fs';
+import * as dotenv from 'dotenv';
+
+const envFilePath = '.env';
+
+// check if env exists
+if (!fs.existsSync(envFilePath)) {
+    const defaultEnvContent = `API_TOKEN=YOUR_TOKEN_HERE`;
+    fs.writeFileSync(envFilePath, defaultEnvContent);
+    console.log('.env created');
+}
 
 // get token from .env and call function to read token
 dotenv.config();
@@ -12,21 +22,16 @@ if (apiToken === "YOUR_TOKEN_HERE") {
 }
 
 // authenticate with API
-let ws;
-try {
-    const apiConfig = {
-        refreshToken: apiToken
-    };
-    const api = MedrunnerApiClient.buildClient(apiConfig);
+const apiConfig = {
+    refreshToken: apiToken
+};
+const api = MedrunnerApiClient.buildClient(apiConfig);
 
-    ws = await api.websocket.initialize();
-    await ws.start();
-} catch (error) {
-    console.error('Invalid Medrunner API token. Has yours expired?');
-    process.exit(1);
-}
+// Initialize and start websocket
+const ws = await api.websocket.initialize();
+await ws.start();
 
-// confirm connection
+// check connection
 console.log(ws.state);
 
 // medrunner update listener, for if we want to have any response to joining & leaving and/or selecting a class
