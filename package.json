@@ -1,20 +1,37 @@
 {
   "name": "medrunnerlistener",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "index.js",
+  "version": "0.1.0",
+  "main": "listener.js",
+  "bin": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "pkg": {
+    "scripts": [
+      "node_modules/@medrunner/**/*.js",
+      "node_modules/@types/node/**/*.js",
+      "node_modules/ws/**/*.js"
+    ],
+    "targets": [
+      "node18-linux-x64",
+      "node18-win-x64"
+    ]
   },
   "keywords": [],
   "author": "Waerren",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "@medrunner/api-client": "^0.2.1",
-    "@types/node": "^22.10.2"
+    "@types/node": "^22.10.2",
+    "ws": "^8.18.0"
   },
-  "devDependencies": {
-    "esbuild": "0.24.0"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoctorKarma111/MRS-Smart-Light.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DoctorKarma111/MRS-Smart-Light/issues"
+  },
+  "homepage": "https://github.com/DoctorKarma111/MRS-Smart-Light#readme",
+  "description": ""
 }
