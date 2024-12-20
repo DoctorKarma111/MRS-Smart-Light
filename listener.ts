@@ -1,8 +1,8 @@
-import { Emergency, MedrunnerApiClient, Person } from '@medrunner/api-client';
+import { MedrunnerApiClient, Emergency, Person } from '@medrunner/api-client';
 import * as fs from 'fs';
 import * as dotenv from 'dotenv';
 
-const envFilePath = '.env';
+const envFilePath = './.env';
 
 // check if env exists
 if (!fs.existsSync(envFilePath)) {
@@ -27,7 +27,7 @@ const apiConfig = {
 };
 const api = MedrunnerApiClient.buildClient(apiConfig);
 
-
+// do everything else
 async function main() {
     // Initialize and start websocket
     const ws = await api.websocket.initialize();
@@ -37,6 +37,7 @@ async function main() {
     console.log(ws.state);
 
     // medrunner update listener, for if we want to have any response to joining & leaving and/or selecting a class
+    // @ts-ignore
     ws.on("PersonUpdate", (runner: Person) => {
         // @ts-ignore potentially the most scuffed solution i've ever seen
         switch (runner.activeClass) {
@@ -77,6 +78,7 @@ async function main() {
     });
 
     // new alert listener, operates independently of whether or not medrunner is currently in a team
+    // @ts-ignore
     ws.on("EmergencyCreate", (emergency: Emergency) => {
         console.log(`Emergency "${emergency.missionName}" alert has been created, submitted by ${emergency.clientRsiHandle}`)
     });

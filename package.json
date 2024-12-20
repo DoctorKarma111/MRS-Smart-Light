@@ -1,15 +1,26 @@
 {
   "name": "medrunnerlistener",
   "version": "1.0.0",
-  "type": "module",
-  "main": "index.js",
+  "type": "commonjs",
+  "main": "listener.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild listener.ts --bundle --outfile=dist/listener.js --platform=node --format=esm --external:@medrunner/api-client,@types/node"
+  },
+  "pkg": {
+    "scripts": [
+      "node_modules/axios/dist/node/*"
+    ],
+    "targets": [
+      "node18-linux-x64",
+      "node18-win-x64"
+    ]
   },
   "keywords": [],
   "author": "Waerren",
   "license": "ISC",
   "description": "",
+  "bin": "dist/listener.js",
   "dependencies": {
     "@medrunner/api-client": "^0.2.1",
     "@types/node": "^22.10.2"
