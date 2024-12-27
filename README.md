@@ -1,16 +1,7 @@
-🚨 Medtek Alert Buddy Smart Light Bar
-
-Alpha Version (Backend_v0.1)
-This project is currently under development and is in the alpha stage. If you're not familiar with its purpose, this repository might not be for you.
-
-📝 About
-
-The Medtek Alert Buddy Smart Light Bar is designed for Medrunner members. 
-It integrates with the Medrunner API to receive alerts and triggers pre-configured lighting presets. 
-This backend manages the communication, configuration, and event handling to ensure seamless operation.
+🚨 Medtek Alert Buddy Smart Light BarThis backend manages the communication, configuration, and event handling to ensure seamless operation.
 
 
-# 🚨 Medtek Alert Buddy Smart Light Bar
+# 🚨 Medtek Alert Buddy Smart Light Bar 🚨
 
 **Alpha Version**  
 _Integrating emerAlpha Version (Backend_v0.1)This project is currently under development and is in the alpha stage. If you're not familiar with its purpose, this repository might not be for you.
