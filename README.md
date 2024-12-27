@@ -1,4 +1,4 @@
-# 🚨 Medtek Alert Buddy Smart Light Bar 🚨
+# 🚨 Medtek Alert Buddy Smart Light Bar
 
 **Alpha Version**  
 _Integrating emerAlpha Version (Backend_v0.1)This project is currently under development and is in the alpha stage. If you're not familiar with its purpose, this repository might not be for you.
