@@ -1,0 +1,35 @@
+//Medtek Alert Buddy Smart Light Bar (Backend_Version_a0.1)//
+
+///This is an alpha version. This is unfinished code.
+If you have no idea what this app is, then this is not for you.///
+
+//!!You will need a **suiting*** ESP32 microcontroller loaded with WLED!! (check WLED documentation)//
+
+//Some links://
+
+//WLED's Documentation: https://kno.wled.ge/
+//Install WLED on your ESP32 at https://install.wled.me/ (don't do that if you didnt read the documentation)
+//Medrunner API Documentation: https://medrunner.dev/
+//GitHub Repo of this project: https://github.com/DoctorKarma111/MRS-Smart-Light
+
+
+
+//Instructions://
+
+1. Generate a medrunner api token (see Medrunner documentation link above)
+2. Open a cmd in the backend folder and run 'parent_app.js' with Node.js.
+3. Paste your medrunner api token in the '.env' file that was created in the backend folder.
+4. Make sure you finished setting up WLED on your ESP32 and connected it to your Wifi network succesfuly.
+5. paste your WLED/ESP32 ip address in the 'config.json' file found in '../shared' folder.
+6. Run 'parent_app.js' again. If you see 'Listening...' in the command window, you are good to go.
+7. You will need to set up some presets in WLED. The default preset for emergencies can be set up in the 'config.json' file found in '../shared' folder.
+
+
+
+//TO-DO//
+
+1. Stop parent app from generating a config file in backend folder.
+2. Make it so that the user can input the token in the cmd window and that the parent app restarts automatically, to use the token.
+3. Check what's wrong with package.json generation.
+4. Add a set of prebuilt emergency presets to the package and instructions on how to import them.
+5. 

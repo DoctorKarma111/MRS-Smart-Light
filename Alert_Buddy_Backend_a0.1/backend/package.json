@@ -2,7 +2,9 @@
   "name": "medrunnerlistener",
   "version": "0.1.0",
   "main": "listener.js",
-  "bin": "index.js",
+  "bin": {
+    "medrunnerlistener": "index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +25,12 @@
   "dependencies": {
     "@medrunner/api-client": "^0.2.1",
     "@types/node": "^22.10.2",
+    "cli-spinners": "^3.2.0",
+    "dotenv": "^16.4.7",
+    "electron": "^33.2.1",
+    "express": "^4.21.2",
+    "ora": "^8.1.1",
+    "server": "^1.0.41",
     "ws": "^8.18.0"
   },
   "repository": {
